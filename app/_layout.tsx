@@ -9,9 +9,21 @@ import { Nunito_400Regular, Nunito_600SemiBold } from '@expo-google-fonts/nunito
 
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import styled, { css } from '@emotion/native'
+import { ThemeProvider } from '@emotion/react'
+import { theme } from './utils/theme';
 
 
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient()
 
 
 export default function Layout() {
@@ -37,15 +49,19 @@ export default function Layout() {
   // Render the children routes now that all the assets are loaded.
   return (
     <SafeAreaProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName='actorlist'
-      >
-        <Stack.Screen name='index' />
-        <Stack.Screen name='actorfav' />
-      </Stack>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+            initialRouteName='actorlist'
+          >
+            <Stack.Screen name='index' />
+            <Stack.Screen name='actor/[id]' />
+          </Stack>
+        </QueryClientProvider>
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }

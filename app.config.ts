@@ -5,7 +5,18 @@ const config: ExpoConfig = {
   name: "star-app",
   slug: "star-app",
   plugins: ["expo-router"],
-  scheme: "star-app-scheme",
+  scheme: "yandevstarapp",
+  android: {
+    package: "com.yandev.starapp",
+  },
+  ios: {
+    bundleIdentifier: "com.yandev.starapp",
+  },
+  extra: {
+    eas: {
+      projectId: "com.yandev.starapp",
+    },
+  },
 };
 
 export default config;

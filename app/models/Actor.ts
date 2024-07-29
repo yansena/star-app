@@ -7,7 +7,7 @@ export type Actor = {
   eye_color: string;
   birth_year: string;
   gender: string;
-  homeworld: string[];
+  homeworld: string;
   films: string[];
   species: string[];
   vehicles: string[];
@@ -15,4 +15,5 @@ export type Actor = {
   created: string;
   edited: string;
   url: string;
+  favorite: boolean;
 };

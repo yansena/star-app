@@ -1,10 +1,9 @@
-import { Nunito_600SemiBold } from "@expo-google-fonts/nunito";
+import { Text } from "react-native-paper";
 import styled from "@emotion/native";
-import { AppTheme } from "./types/themeTypes";
-import { theme } from "./utils/theme";
+import { theme } from "../utils/theme";
 
 export const Container = styled.View`
-  padding: 16px;
+  padding: 32px;
   width: 100%;
   height: 100%;
   background-color: ${theme.colors.blueDark.dark};
@@ -41,6 +40,12 @@ export const SubTitle = styled.Text`
   color: ${theme.colors.offWhite};
 `;
 
-export const IndicatorContainer = styled.View`
-  margin-top: 24px;
+export const ProfileDetails = styled.View`
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+`;
+
+export const ActorText = styled.Text`
+  color: ${theme.colors.offWhite};
 `;

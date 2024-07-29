@@ -1,17 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { StyleSheet, Text, View } from 'react-native';
-import { Container } from './style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActorsList } from './components/organisms/ActorsList';
+import { View } from 'react-native';
+// import { Globals } from './utils/GlobalStyles';
+import { Container, Title, SubTitle, HeadContent, TitleBox } from './style';
 
 SplashScreen.preventAutoHideAsync();
+
+// useEffect(() => {
+
+// }, [])
 
 export default function App() {
   return (
     <SafeAreaView>
       <Container>
+
+        <HeadContent>
+          <View>
+            <SubTitle>
+              Wellcome
+            </SubTitle>
+          </View>
+          <TitleBox>
+            <Title>
+              The Star App
+            </Title>
+          </TitleBox>
+        </HeadContent>
         <ActorsList />
       </Container>
     </SafeAreaView >
