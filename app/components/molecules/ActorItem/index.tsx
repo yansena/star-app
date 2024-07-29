@@ -15,7 +15,7 @@ interface IListItem {
 
 export function ActorListItem({ index, actor }: IListItem) {
 
-  const { setSelectedActor } = useActorsStore()
+  const { setSelectedActor } = useActorsStore();
 
   const handleActorDetail = () => {
     setSelectedActor(actor);

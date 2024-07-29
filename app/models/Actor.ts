@@ -1,4 +1,5 @@
 export type Actor = {
+  id: string;
   name: string;
   height: number;
   mass: number;

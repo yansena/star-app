@@ -12,9 +12,8 @@ import { Actor } from '../../../models/Actor';
 
 
 export function ActorsList() {
-  const { status, error, isLoading } = useActorsViewModel();
+  const { status, error, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useActorsViewModel();
   const actors = useActorsStore((state) => state.actors)
-
 
   if (isLoading) {
     return (
@@ -23,18 +22,36 @@ export function ActorsList() {
       </IndicatorContainer>
     )
   };
+
   if (status === 'error') return <Text>Error: {error?.message}</Text>;
+
+  const loadMoreActors = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
   return (
     <Container>
       <FlatList
+        // style={{ marginTop: 16 }}
         data={actors}
-        renderItem={({ item, index }) => <ActorListItem
-          key={index}
-          index={index}
-          actor={item}
-        // onPress={( => onAc)}
-        />} />
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, index }) =>
+          <ActorListItem
+            index={index}
+            actor={item}
+          />}
+        onEndReached={loadMoreActors}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          isFetchingNextPage ? (
+            <View style={{ padding: 10 }}>
+              <ActivityIndicator animating={true} color={theme.colors.offWhite} />
+            </View>
+          ) : null
+        }
+      />
     </Container>
   )
 }

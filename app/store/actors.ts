@@ -16,7 +16,12 @@ const useActorsStore = create<ActorsState>((set) => ({
   favoritesActors: [],
   setActors: (actors) => set({ actors }),
   addActors: (newActors) =>
-    set((state) => ({ actors: [...state.actors, ...newActors] })),
+    set((state) => {
+      const uniqueActors = newActors.filter(
+        (newActor) => !state.actors.some((actor) => actor.id === newActor.id)
+      );
+      return { actors: [...state.actors, ...uniqueActors] };
+    }),
   addFavorite: (actorName) =>
     set((state) => ({
       actors: state.actors.map((actor) =>

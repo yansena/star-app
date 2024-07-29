@@ -15,8 +15,6 @@ export const useSelectedActorViewModel = (id: number) => {
 
   const selectedActor = actors.find((actor) => actor.name === data?.name);
 
-  console.log(selectedActor?.favorite);
-
   return {
     actor: selectedActor,
     error,

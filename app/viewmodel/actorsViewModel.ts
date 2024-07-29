@@ -1,11 +1,7 @@
 import { Actor } from "app/models/Actor";
 import useActorsStore from "../store/actors";
 import { fetchActors, fetchSelectedActor } from "../services/actorsService";
-import {
-  useInfiniteQuery,
-  useQuery,
-  UseQueryOptions,
-} from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ActorsReturnProps } from "app/models/ActorsReturn";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
@@ -33,13 +29,18 @@ export const useActorsViewModel = () => {
     },
   });
 
-  const onActorPress = (actor: Actor) => {
-    useActorsStore.setState({ selectedActor: actor });
+  const generateUnique = (actor: Actor, index: number) => {
+    return `${actor.name}_${index}`;
   };
 
   useEffect(() => {
     if (data) {
-      const newActors = data.pages.flatMap((page) => page.results);
+      const newActors = data.pages.flatMap((page, pageIndex) =>
+        page.results.map((actor, index) => ({
+          ...actor,
+          id: generateUnique(actor, pageIndex * page.results.length + index),
+        }))
+      );
       addActors(newActors);
     }
   }, [data, addActors]);
@@ -49,7 +50,6 @@ export const useActorsViewModel = () => {
     error,
     isFetching,
     isLoading,
-    onActorPress,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
