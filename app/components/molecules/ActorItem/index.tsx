@@ -1,22 +1,27 @@
-import { Icon, Text } from "react-native-paper";
+import { ActivityIndicator, Icon, Text } from "react-native-paper";
 import { Container, NameTitle, IconTitleBox } from "./style";
 import { Icon as ElementIcon } from '@rneui/themed';
 import { theme } from "app/utils/theme";
 import { Pressable } from "react-native";
 import { Link, router } from "expo-router";
+import { Actor } from "app/models/Actor";
+import useActorsStore from "app/store/actors";
 
 interface IListItem {
-  name: string;
   index: number;
-  favorite: boolean;
+  actor: Actor;
 }
 
 
-export function ActorListItem({ name, index, favorite }: IListItem) {
+export function ActorListItem({ index, actor }: IListItem) {
+
+  const { setSelectedActor } = useActorsStore()
 
   const handleActorDetail = () => {
+    setSelectedActor(actor);
     router.push(`/actor/${index}`);
   }
+
 
   return (
     <Pressable onPress={handleActorDetail}>
@@ -29,11 +34,11 @@ export function ActorListItem({ name, index, favorite }: IListItem) {
             size={20}
           />
           <NameTitle >
-            {name}
+            {actor.name}
           </NameTitle>
         </IconTitleBox>
         {
-          favorite === true && (
+          actor.favorite === true && (
             <Icon
               source="star"
               color={theme.colors.yellow}

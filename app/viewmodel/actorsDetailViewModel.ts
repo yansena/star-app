@@ -13,19 +13,12 @@ export const useSelectedActorViewModel = (id: number) => {
 
   const { actors } = useActorsStore();
 
-  // actors.find((actor) => actor.name === )
+  const selectedActor = actors.find((actor) => actor.name === data?.name);
 
-  let newActorData;
-
-  if (data) {
-    newActorData = {
-      ...data,
-      favorite: false,
-    };
-  }
+  console.log(selectedActor?.favorite);
 
   return {
-    actor: newActorData,
+    actor: selectedActor,
     error,
     isLoading,
   };

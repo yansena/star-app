@@ -7,6 +7,7 @@ import { Container } from "./style";
 import useActorsStore from "app/store/actors";
 import { theme } from "app/utils/theme";
 import { IndicatorContainer } from "app/style";
+import { Actor } from '../../../models/Actor';
 
 
 
@@ -31,8 +32,7 @@ export function ActorsList() {
         renderItem={({ item, index }) => <ActorListItem
           key={index}
           index={index}
-          name={item.name}
-          favorite={item.favorite}
+          actor={item}
         // onPress={( => onAc)}
         />} />
     </Container>
