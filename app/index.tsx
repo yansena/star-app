@@ -3,10 +3,14 @@ import * as SplashScreen from 'expo-splash-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActorsList } from './components/organisms/ActorsList';
 import { View } from 'react-native';
+// import { Globals } from './utils/GlobalStyles';
 import { Container, Title, SubTitle, HeadContent, TitleBox } from './style';
 
 SplashScreen.preventAutoHideAsync();
 
+// useEffect(() => {
+
+// }, [])
 
 export default function App() {
   return (
